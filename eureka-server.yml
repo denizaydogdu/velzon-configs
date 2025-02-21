@@ -1,0 +1,64 @@
+# Genel Ayarlar (Tüm Profiller İçin Ortak)
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    appname: eureka-server
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+# Localhost Profili
+---
+spring:
+  config:
+    activate:
+      on-profile: localhost
+
+info:
+  component: Eureka Server - Github - Localhost
+
+eureka:
+  instance:
+    hostname: localhost
+
+server:
+  port: 8761
+
+# Docker Profili
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+    import: optional:configserver:http://config-server:8888
+
+info:
+  component: Eureka Server - Github - Docker
+
+eureka:
+  instance:
+    hostname: eureka-server
+
+server:
+  port: 8761
+
+# Prod Profili
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+info:
+  component: Eureka Server - Github - Prod
+
+eureka:
+  instance:
+    hostname: eureka-server-prod
+
+server:
+  port: 8761
